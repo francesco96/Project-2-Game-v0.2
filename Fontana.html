@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Francesco Galletti
+	Introduction to Programming
+	9/29/14
+	Project 2 - Game v0.2 -->
+	
+	  <head>
+      <title>
+         Fontana: The Illegible Scroll
+      </title>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <script type="text/javascript">
+		
+		 //Setting global variables.
+         var currLoc=0;
+         //Countzero is a global variable to determine whether the player has never been in room zero.
+         var countzero = 0;
+         //Countone is a global variable to determine whether the player has never been in room one.
+		 var countone = 0;
+         //Counttwo is a global variable to determine whether the player has never been in room two.
+		 var counttwo = 0;
+         //Countthree is a global variable to determine whether the player has never been in room three.
+		 var countthree = 0;
+         //Score is the score of the player.
+		 var score=0;
+		 
+         function goNorth() { //Function goNorth() makes the player go North when it clicks on the button North (and it is possible)
+            if(currLoc === 1){ //If the currentLocation is the room number 1 and the player clicked on 'North', the currentLocation changes in room number 0.
+				currLoc = 0;
+				if(countzero===0){// Used to count if the player has never been in the room. If it is his/her first time, 5 is added to the Score.
+					countzero++;
+					score=score+5;
+				}
+				dispMsg('You find yourself in a dark kitchen'); //Displays Score and the message between paranthesis.
+			} else {
+				if(currLoc ===  3) { //If the currentLocation is the room number 3 and the player clicked on 'North', the currentLocation changes in room number 2.
+					currLoc = 2;
+					if(counttwo==0){
+						counttwo++;
+						score=score+5;
+					}
+					dispMsg('You enter a dark room. It is the living room.');
+				} else { //If the player clicked on 'North' but there is no room North from the currentLocation, it will be displayed 'You cannot go North'
+					dispMsg('You cannot go North');
+				}				
+			}
+         }
+
+		function goSouth() { //Function goSouth() makes the player go South when it clicks on the button South (and it is possible)
+            if(currLoc === 0){
+				currLoc = 1;
+				if(countone===0){
+						countone++;
+						score=score+5;
+				}
+				dispMsg('You enter a dark bathroom.');
+			} else {
+				if(currLoc ===  2) {
+					currLoc = 3;
+					if(countthree===0){
+						countthree++;
+						score=score+5;
+						alert('Victory! Your score is: ' + score);
+					}
+					dispMsg('You find yourself in the garden. You are outside!');
+				} else {
+					dispMsg('You cannot go South')
+				}				
+			}
+         }
+         
+         function goEast() { //Function goEast() makes the player go East when it clicks on the button East (and it is possible)
+            if(currLoc === 1){
+				currLoc = 2;
+				if(counttwo===0){
+						counttwo++;
+						score=score+5;
+				}
+				dispMsg('You enter a dark room. It is the living room.');
+			} else {
+				dispMsg('You cannot go East')
+			}
+		 }						
+			
+         
+         function goWest() { //Function goWest() makes the player go West when it clicks on the button West (and it is possible)
+            if(currLoc === 2){
+				currLoc = 1;
+				if(countone===0){
+						countone++;
+						score=score+5;
+				}
+				dispMsg('You enter a dark bathroom');
+			} else {
+				dispMsg('You cannot go West')
+			}
+		 }	
+
+         function dispMsg(message) { //Function dispMsg(message) displays the message given as input plus the Score in the textarea.
+            var target = document.getElementById("taMain");
+            target.value = message + "\n\n" + target.value;
+            target.value="Score:" + score + "\n" + target.value;
+         }
+         
+      </script>
+   </head>
+   <body>
+       Mailto:
+		<address> <!--Looked up on 'StackOverFlow' to have an idea of how to use mailto -->
+		Francesco (<a href="mailto:francesco.galletti1@marist.edu">- Marist Student Email -</a>, <a href="mailto:bogello@hotmail.com">- Personal Email -</a>)
+		</address><br>--------------------------------------------<br><br>
+	   
+	   Fontana: The Illegible Scroll<br>
+	   Your name is John. You wake up in the middle of the night and you don't remember anything about your past.
+	   <br>	   
+	   You are in a dark house and you want to find a way out of there. Let's go!
+       
+       <br>
+       <br>
+       
+       <!-- textarea -->
+       <textarea rows="10" cols="40" id="taMain">You find yourself in a dark kitchen.</textarea>
+	   
+	   <br>
+	   <br>
+	   
+       <input type="button"
+              value="North"
+              onclick="goNorth();" />
+       <input type="button"
+              value="South"
+              onclick="goSouth();" />
+       <input type="button"
+              value="West"
+              onclick="goWest();" />
+       <input type="button"
+              value="East"
+              onclick="goEast();" />
+                   
+   </body>
+</html>
